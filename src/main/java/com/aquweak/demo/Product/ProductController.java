@@ -1,6 +1,8 @@
 package com.aquweak.demo.Product;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import com.aquweak.demo.Exceptions.ProductNotFoundException;
 import com.aquweak.demo.Product.Model.Product;
 import com.aquweak.demo.Product.Model.ProductDTO;
 import com.aquweak.demo.Product.Model.UpdateProductCommand;
@@ -9,12 +11,14 @@ import com.aquweak.demo.Product.commandhandlers.DeleteProductCommandHandler;
 import com.aquweak.demo.Product.commandhandlers.UpdateProductCommandHandler;
 import com.aquweak.demo.Product.queryhandlers.GetAllProductsQueryHandler;
 import com.aquweak.demo.Product.queryhandlers.GetProductQueryHandler;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,12 +49,12 @@ public class ProductController {
     private UpdateProductCommandHandler updateProductCommandHandler;
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getProducts() {
+    public ResponseEntity<List<Product>> getProducts() {
         return getAllProductsQueryHandler.execute(null);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProduct(@PathVariable Integer id) {
+    public ResponseEntity<Product> getProduct(@PathVariable Integer id) {
         return getProductQueryHandler.execute(id);
     }
 
