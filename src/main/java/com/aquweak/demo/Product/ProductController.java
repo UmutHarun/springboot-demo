@@ -2,6 +2,7 @@ package com.aquweak.demo.Product;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.aquweak.demo.Product.Model.Product;
+import com.aquweak.demo.Product.Model.ProductDTO;
 import com.aquweak.demo.Product.Model.UpdateProductCommand;
 import com.aquweak.demo.Product.commandhandlers.CreateProductCommandHandler;
 import com.aquweak.demo.Product.commandhandlers.DeleteProductCommandHandler;
@@ -25,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/products")
 public class ProductController {
     
-    @Autowired
-    private ProductRepository productRepository;
+    // @Autowired
+    // private ProductRepository productRepository;
 
     @Autowired
     private GetAllProductsQueryHandler getAllProductsQueryHandler;
@@ -44,12 +45,12 @@ public class ProductController {
     private UpdateProductCommandHandler updateProductCommandHandler;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<ProductDTO>> getProducts() {
         return getAllProductsQueryHandler.execute(null);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable Integer id) {
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable Integer id) {
         return getProductQueryHandler.execute(id);
     }
 
