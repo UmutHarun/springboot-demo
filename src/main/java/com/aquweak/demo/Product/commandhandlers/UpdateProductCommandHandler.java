@@ -3,6 +3,7 @@ package com.aquweak.demo.Product.commandhandlers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.aquweak.demo.Command;
@@ -17,6 +18,7 @@ public class UpdateProductCommandHandler implements Command<UpdateProductCommand
     @Autowired
     private ProductRepository productRepository;
 
+    @CacheEvict(value = "productCache" , key = "#entity.getId()")
     @Override
     public ResponseEntity<ResponseEntity> execute(UpdateProductCommand entity) {
         Optional<Product> optionalProduct = productRepository.findById(entity.getId());

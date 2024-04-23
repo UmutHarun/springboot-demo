@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping(value = "/customers" , method = {RequestMethod.GET , RequestMethod.POST})
+@RequestMapping(value = "/customers" , method = {RequestMethod.GET , RequestMethod.POST , RequestMethod.PUT})
 public class CustomerController {
 
     @Autowired
