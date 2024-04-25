@@ -13,7 +13,8 @@ public class HeaderController {
 
         if(region.equals("CAN")) return "I bleed maple syrup";
 
-        return "Country not supported :(";
+        // return "Country not supported :(";
+        return "";
     }
 
 }
